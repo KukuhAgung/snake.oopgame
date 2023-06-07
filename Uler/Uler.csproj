@@ -1,0 +1,71 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <Nullable>disable</Nullable>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Artboard 1.png" />
+    <None Remove="assets\aku punya ini %28online-audio-converter.com%29.wav" />
+    <None Remove="assets\Body.png" />
+    <None Remove="assets\Body1.png" />
+    <None Remove="assets\DeadBody.png" />
+    <None Remove="assets\DeadHead.png" />
+    <None Remove="assets\DroidSansMono.ttf" />
+    <None Remove="assets\Empty.png" />
+    <None Remove="assets\Empty1.png" />
+    <None Remove="assets\Food.png" />
+    <None Remove="assets\Head.png" />
+    <None Remove="assets\Head1.png" />
+    <None Remove="assets\icon.ico" />
+    <None Remove="assets\preview_4 %28online-audio-converter.com%29.wav" />
+    <None Remove="assets\Shield.png" />
+    <None Remove="assets\y2mate %28mp3cut.net%29.wav" />
+    <None Remove="assets\y2mate.com - 3 2 1 0 Countdown With Sound Effect No Copyright Ready To Use %28online-audio-converter.com%29.wav" />
+    <None Remove="assets\y2mate.com - 3 Seconds Timer 3 Seconds Countdown with Clock with Laser Sound.mp3" />
+    <None Remove="assets\y2mate.com - It Takes Two to Tango Vanoss Gaming Background Music HD %28online-audio-converter.com%29.wav" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MySql.Data" Version="8.0.33" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Artboard 1.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="assets\Body.png" />
+    <Resource Include="assets\Body1.png" />
+    <Resource Include="assets\DeadBody.png" />
+    <Resource Include="assets\DeadHead.png" />
+    <Resource Include="assets\DroidSansMono.ttf" />
+    <Resource Include="assets\Empty.png" />
+    <Resource Include="assets\Empty1.png" />
+    <Resource Include="assets\Food.png" />
+    <Resource Include="assets\Head.png" />
+    <Resource Include="assets\Head1.png" />
+    <Resource Include="assets\icon.ico" />
+    <Resource Include="assets\Shield.png" />
+    <Resource Include="assets\y2mate.com - 3 Seconds Timer 3 Seconds Countdown with Clock with Laser Sound.mp3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Properties\Settings.Designer.cs">
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,263 @@
+﻿<Window x:Class="Uler.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Uler"
+        mc:Ignorable="d"
+        Title="Uler" Height="500" Width="800"
+        MinWidth="300" MinHeight="300"
+        Background="{StaticResource BackgroundColor}"
+        Foreground= "{StaticResource TextColor}"
+        FontFamily="{StaticResource MainFont}"
+        WindowStartupLocation="CenterScreen"
+        Icon="assets\icon.ico"
+        KeyDown="Window_KeyDown">
+    <Viewbox>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="40*"/>
+                <RowDefinition Height="7*"/>
+            </Grid.RowDefinitions>
+            <TextBlock x:Name="txtname"
+                           HorizontalAlignment="Left"
+                           Text="NAMA PLAYER :"
+                           FontSize="11"
+                           VerticalAlignment="Center"
+                           FontFamily="Poppins"
+                           FontWeight="SemiBold" Margin="20,0,0,0"/>
+            <TextBlock x:Name="ScoreText"
+                           Text="SCORE = 0"
+                           FontSize="10"
+                           FontFamily="Poppins"
+                           FontWeight="SemiBold" Margin="369,0,-369,0"/>
+            <Border x:Name="GridBorder"
+                BorderBrush="{StaticResource GridBackgroundColor}"
+                BorderThickness="1.5"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Top"
+                RenderOptions.EdgeMode="Aliased"
+                Margin="0,13,0,0" Grid.RowSpan="3">
+                <UniformGrid x:Name="GameGrid"
+                         Width="400"
+                         Height="400"
+                         Background="{StaticResource GridBackgroundColor}"
+                         SnapsToDevicePixels="True"
+                         RenderOptions.BitmapScalingMode="HighQuality">
+                </UniformGrid>
+            </Border>
+
+            <Border x:Name="Overlay"
+                    Background="{StaticResource OverlayColor}"
+                    Width="{Binding Path=ActualWidth, ElementName=GridBorder}"
+                    Height="{Binding Path=ActualHeight, ElementName=GridBorder}"
+                    Margin="20,13,20,20"
+                    RenderOptions.EdgeMode="Aliased" Grid.RowSpan="3">
+                <StackPanel x:Name="pnlmulai"
+                            HorizontalAlignment="Center" 
+                            VerticalAlignment="Center"
+                            Visibility="Visible">
+                    <TextBlock x:Name="OverlayText" 
+                                FontSize='15' 
+                                Text="Masukan Username"
+                                TextAlignment="Center"
+                                TextWrapping="Wrap"
+                                Margin="10"/>
+                    <TextBox   x:Name="bxinput" 
+                                Width="200"
+                                TextWrapping="NoWrap"
+                                Margin="15"
+                                Height="27"
+                                TextChanged="bxinput_TextChanged" TextAlignment="Center"/>
+                    <Button    x:Name="btnq"
+                                Content="Mulai"
+                                Width="150"
+                                Height="29"
+                                BorderBrush="#FF564747"
+                                Click="btnq_Click"
+                                Background="{DynamicResource {x:Static SystemColors.GradientActiveCaptionBrushKey}}"/>
+                    <Button    x:Name="setting"
+                                Content="Setting"
+                                Width="150"
+                                Height="29"
+                                BorderBrush="#FF564747"
+                                Margin="12"
+                                Click="setting_Click"
+                                Background="{DynamicResource {x:Static SystemColors.GradientActiveCaptionBrushKey}}"/>
+                    <Button    x:Name="exit"
+                                Content="exit"
+                                Width="150"
+                                Height="29"
+                                BorderBrush="#FF564747"
+                                Margin="5"
+                                Click="exit_Click"
+                                Background="{DynamicResource {x:Static SystemColors.GradientActiveCaptionBrushKey}}"/>
+                </StackPanel>
+            </Border>
+            <Border x:Name="Overlay2"
+                    Background="{StaticResource OverlayColor}"
+                    Width="{Binding Path=ActualWidth, ElementName=GridBorder}"
+                    Height="{Binding Path=ActualHeight, ElementName=GridBorder}"
+                    Margin="20,13,20,20"
+                    RenderOptions.EdgeMode="Aliased"
+                    Visibility="Hidden" Grid.RowSpan="3">
+                <StackPanel x:Name="pnlsetting"
+                            HorizontalAlignment="Center" 
+                            VerticalAlignment="Center"
+                            Height="266"
+                            Width="307">
+                    <TextBlock x:Name="Settingtxt" 
+                                FontSize='15' 
+                                Text="Setting"
+                                TextAlignment="Center"
+                                TextWrapping="Wrap"
+                                Margin="10"/>
+                    <Button    x:Name="Score"
+                                Content="Sembunyikan Score"
+                                Width="150"
+                                Height="29"
+                                BorderBrush="#FF564747"
+                                Click="Score_Click"
+                                Background="{DynamicResource {x:Static SystemColors.GradientActiveCaptionBrushKey}}" Margin="0,5,0,0"/>
+                    <Button    x:Name="resets"
+                                Content="Reset Leaderboard"
+                                Width="150"
+                                Height="29"
+                                BorderBrush="#FF564747"
+                                Click="resets_Click"
+                                Background="{DynamicResource {x:Static SystemColors.GradientActiveCaptionBrushKey}}" Margin="0,5,0,0"/>
+                    <Button    x:Name="Back"
+                                Content="Kembali"
+                                Width="150"
+                                Height="29"
+                                BorderBrush="#FF564747"
+                                Click="Back_Click"
+                                Background="{DynamicResource {x:Static SystemColors.GradientActiveCaptionBrushKey}}" RenderTransformOrigin="0.5,0.5" Margin="0,20,0,0"/>
+                    <Label     x:Name="Attention"
+                               Content="Data tidak dapat dikembalikan ketika terhapus !"
+                               FontFamily="Poppins"
+                               FontSize="12"
+                               HorizontalContentAlignment="Center"
+                               VerticalContentAlignment="Center"
+                               Foreground="#686868"
+                               FontWeight="Bold" Margin="0,5,0,0"/>
+                </StackPanel>
+            </Border>
+            <Border x:Name="Overlay1"
+                    Background="{StaticResource OverlayColor}"
+                    Width="{Binding Path=ActualWidth, ElementName=GridBorder}"
+                    Height="{Binding Path=ActualHeight, ElementName=GridBorder}"
+                    Margin="20,13,20,20"
+                    RenderOptions.EdgeMode="Aliased"
+                    Visibility="Hidden" Grid.RowSpan="3">
+                <StackPanel x:Name="pnlover"
+                            HorizontalAlignment="Center" 
+                            VerticalAlignment="Top"
+                            Background="{StaticResource OverlayColor}"
+                            Grid.Row="1"
+                            Margin="0,125,0,0">
+                    <TextBlock x:Name="GameOverText" 
+                            FontSize='18' 
+                            Text="Game Over"
+                            TextAlignment="Center"
+                            TextWrapping="Wrap"
+                            Margin="3"
+                            FontFamily="Poppins"
+                            FontWeight="SemiBold"/>
+                    <TextBlock x:Name="txtnameo"
+                            HorizontalAlignment="center"
+                            Text="''"
+                            FontSize="15"
+                            VerticalAlignment="Center"
+                            FontFamily="Poppins"
+                            FontWeight="SemiBold"/>
+                    <TextBlock x:Name="HighStat"
+                            Text="HIGH SCORE"
+                            FontSize="14"
+                            FontFamily="Poppins"
+                            FontWeight="SemiBold"
+                            HorizontalAlignment="Center"/>
+                    <TextBlock x:Name="HighScore"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Text="0"
+                            FontSize="14"/>
+                    <Button x:Name="btnag"
+                            Content="Mulai Ulang"
+                            Width="150"
+                            Height="29"
+                            BorderBrush="#FF564747"
+                            Click="btnag_Click"
+                            Background="{DynamicResource {x:Static SystemColors.GradientActiveCaptionBrushKey}}"/>
+                    <Button x:Name="btnme"
+                            Content="Kembali Menu"
+                            Width="150"
+                            Height="29"
+                            BorderBrush="#FF564747"
+                            Click="btnme_Click"
+                            Background="{DynamicResource {x:Static SystemColors.GradientActiveCaptionBrushKey}}"/>
+                    <Button x:Name="Leaderboard"
+                            Content="Leaderboard"
+                            Width="150"
+                            Height="29"
+                            BorderBrush="#FF564747"
+                            Margin="12"
+                            Click="Leaderboard_Click"
+                            Background="{DynamicResource {x:Static SystemColors.GradientActiveCaptionBrushKey}}"/>
+                </StackPanel>
+            </Border>
+            <Grid
+                x:Name="Leadboard"
+                Visibility="Hidden"
+                Grid.RowSpan="3" Margin="0,0,0,20">
+
+                <ScrollViewer
+                    VerticalScrollBarVisibility="Hidden" Grid.RowSpan="2">
+                    <Grid x:Name="LeaderboardMenu"
+                          Background="{StaticResource OverlayColor}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="100"/>
+                        </Grid.RowDefinitions>
+                        <Label x:Name="lblposisi"
+                               Content="No"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               FontFamily="Montserrat"
+                               FontSize="14"
+                               FontWeight="Bold" Foreground="#FFF6F6F6"/>
+                        <Label x:Name="lblnama"
+                               Grid.Column="1" Grid.Row="0"
+                               Content="Username"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               FontFamily="Montserrat"
+                               FontSize="14"
+                               FontWeight="Bold" Foreground="#FFF6F6F6"/>
+                        <Label x:Name="lblscore"
+                               Grid.Column="2" Grid.Row="0"
+                               Content="Score"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               FontFamily="Montserrat"
+                               FontSize="14"
+                               FontWeight="Bold" Foreground="#FFF6F6F6"/>
+                    </Grid>
+                </ScrollViewer>
+                <Button x:Name="btnback"
+                        Grid.Row="1"
+                        Content="Kembali"
+                        Width="150"
+                        Height="29"
+                        BorderBrush="#FF564747"
+                        Click="btback_Click"
+                        Background="{DynamicResource {x:Static SystemColors.GradientActiveCaptionBrushKey}}" Margin="146,160,147,29"/>
+            </Grid>
+        </Grid>
+    </Viewbox>
+</Window>
